@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 //        SimpleMediaSource mediaSource = new SimpleMediaSource("http://pullhlsbb8f2e48.live.126.net/live/7de213ebb3dc4db2aa2f32f3da0b028d/playlist.m3u8");
 //        SimpleMediaSource mediaSource = new SimpleMediaSource("http://rotation.vod.zlive.cc/channel/1234.m3u8");
 //        SimpleMediaSource mediaSource = new SimpleMediaSource("https://media.w3.org/2010/05/sintel/trailer.mp4");
-        SimpleMediaSource mediaSource = new SimpleMediaSource("http://flv2.bn.netease.com/videolib3/1604/28/fVobI0704/SD/fVobI0704-mobile.mp4");
-//        SimpleMediaSource mediaSource = new SimpleMediaSource("http://stream1.hnntv.cn/lywsgq/sd/live.m3u8");
+//        SimpleMediaSource mediaSource = new SimpleMediaSource("http://flv2.bn.netease.com/videolib3/1604/28/fVobI0704/SD/fVobI0704-mobile.mp4");
+        SimpleMediaSource mediaSource = new SimpleMediaSource("http://stream1.hnntv.cn/lywsgq/sd/live.m3u8");
 
         mediaSource.setDisplayName("VideoPlaying");
         List<ExoMediaSource.Quality> qualities = new ArrayList<>();

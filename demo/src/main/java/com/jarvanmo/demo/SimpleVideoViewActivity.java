@@ -35,23 +35,142 @@ import static com.jarvanmo.exoplayerview.orientation.OnOrientationChangedListene
 public class SimpleVideoViewActivity extends AppCompatActivity {
 
     private ExoVideoView videoView;
-    private View wrapper;
-    private final String[] modes = new String[]{"RESIZE_MODE_FIT", "RESIZE_MODE_FIXED_WIDTH"
-            , "RESIZE_MODE_FIXED_HEIGHT", "RESIZE_MODE_FILL", "RESIZE_MODE_ZOOM"};
-    private Spinner modeSpinner;
-    private ArrayAdapter<String> adapter;
 
-
+    private final String[] urls = new String[]{
+            "http://iptv.pdsu.edu.cn/hls/zjhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hunanhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jshd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv5hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dfhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/ahhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv8hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv1hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv2hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv3hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv4hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv5hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv5phd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv6hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv7hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv8hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv9hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv10hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv12hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv14hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cgtnhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/chchd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv1hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv2hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv4hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv9hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv11hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hunanhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/zjhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jshd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dfhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/ahhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hljhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/lnhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/szhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gdhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/tjhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hbhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sdhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cqhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/docuchina.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/schd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gedocu.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dnhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hebhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jxhd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cetv1hd.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv1.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv2.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv3.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv4.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv5.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv6.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv7.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv8.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv9.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv10.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv11.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv12.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv13.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv14.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv15.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cctv16.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dyjctv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fyjctv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fyyytv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fyzqtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gfjstv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hjjctv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sjdltv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv1.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv2.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv3.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv4.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv5.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv7.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv8.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv9.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/btv10.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/zjtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hunantv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jstv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dftv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sztv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/ahtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hntv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sxtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jltv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gdtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sdtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hbtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gxtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hebtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/xztv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/nmtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/qhtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sctv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/tjtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sxrtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/lntv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/xmtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/xjtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/hljtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/yntv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jxtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/dntv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gztv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/nxtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/gstv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cqtv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/bttv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/lytv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cetv1.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cetv3.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/cetv4.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/chcatv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/chctv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/jykttv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/sdetv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fhzw.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fhzx.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/fhdy.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/discovery.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/natlgeo.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/startv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/channelv.m3u8",
+    "http://iptv.pdsu.edu.cn/hls/starsports.m3u8",
+    };
+    private int m_Index = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_video_view);
-        wrapper = findViewById(R.id.wrapper);
-
-        initSpinner();
-        initControllerMode();
         initVideoView();
-        initCustomViews();
     }
 
     private void initVideoView() {
@@ -66,9 +185,9 @@ public class SimpleVideoViewActivity extends AppCompatActivity {
 
         videoView.setOrientationListener(orientation -> {
             if (orientation == SENSOR_PORTRAIT) {
-                changeToPortrait();
+                //changeToPortrait();
             } else if (orientation == SENSOR_LANDSCAPE) {
-                changeToLandscape();
+                //changeToLandscape();
             }
         });
 
@@ -78,136 +197,47 @@ public class SimpleVideoViewActivity extends AppCompatActivity {
 //        SimpleMediaSource mediaSource = new SimpleMediaSource("http://flv2.bn.netease.com/videolib3/1604/28/fVobI0704/SD/fVobI0704-mobile.mp4");
 //        mediaSource.setDisplayName("Apple HLS");
 
-        SimpleMediaSource mediaSource = new SimpleMediaSource("http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4");
-        mediaSource.setDisplayName("Apple HLS");
-
+        //SimpleMediaSource mediaSource = new SimpleMediaSource("http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4");
+        SimpleMediaSource mediaSource = new SimpleMediaSource(urls[m_Index]);
+        mediaSource.setDisplayName(urls[m_Index]);
         //demo only,not real multi quality, urls are the same actually
-        List<ExoMediaSource.Quality> qualities = new ArrayList<>();
-        ExoMediaSource.Quality quality;
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.YELLOW);
-        SpannableString spannableString = new SpannableString("1080p");
-        spannableString.setSpan(colorSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        quality = new SimpleQuality(spannableString, mediaSource.uri());
-        qualities.add(quality);
-
-        spannableString = new SpannableString("720p");
-        colorSpan = new ForegroundColorSpan(Color.LTGRAY);
-        spannableString.setSpan(colorSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        quality = new SimpleQuality(spannableString, mediaSource.uri());
-        qualities.add(quality);
-
-        mediaSource.setQualities(qualities);
+//        List<ExoMediaSource.Quality> qualities = new ArrayList<>();
+//        ExoMediaSource.Quality quality;
+//        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.YELLOW);
+//        SpannableString spannableString = new SpannableString("1080p");
+//        spannableString.setSpan(colorSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+//        quality = new SimpleQuality(spannableString, mediaSource.uri());
+//        qualities.add(quality);
+//
+//        spannableString = new SpannableString("720p");
+//        colorSpan = new ForegroundColorSpan(Color.LTGRAY);
+//        spannableString.setSpan(colorSpan, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+//        quality = new SimpleQuality(spannableString, mediaSource.uri());
+//        qualities.add(quality);
+//
+//        mediaSource.setQualities(qualities);
 //        videoView.changeWidgetVisibility(R.id.exo_player_controller_back,View.INVISIBLE);
-        videoView.setMultiQualitySelectorNavigator(new MultiQualitySelectorAdapter.MultiQualitySelectorNavigator() {
-            @Override
-            public boolean onQualitySelected(ExoMediaSource.Quality quality) {
-                quality.setUri(Uri.parse("https://media.w3.org/2010/05/sintel/trailer.mp4"));
-                return false;
-            }
-        });
-        videoView.play(mediaSource, false);
+//        videoView.setMultiQualitySelectorNavigator(new MultiQualitySelectorAdapter.MultiQualitySelectorNavigator() {
+//            @Override
+//            public boolean onQualitySelected(ExoMediaSource.Quality quality) {
+//                quality.setUri(Uri.parse("https://media.w3.org/2010/05/sintel/trailer.mp4"));
+//                return false;
+//            }
+//        });
+        videoView.play(mediaSource, true);
 
     }
 
-    private void initSpinner() {
-        modeSpinner = findViewById(R.id.spinner);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        modeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                videoView.setResizeMode(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        adapter.addAll(modes);
-        modeSpinner.setAdapter(adapter);
+    private void onKeyUP()
+    {
+        m_Index++;
+        if (!(m_Index < urls.length))
+        {
+            m_Index = 0;
+        }
+        videoView.releasePlayer();
+        initVideoView();
     }
-
-    private void initControllerMode() {
-        CheckBox all = findViewById(R.id.all);
-        CheckBox top = findViewById(R.id.top);
-        CheckBox topLandscape = findViewById(R.id.topLandscape);
-        CheckBox bottom = findViewById(R.id.bottom);
-        CheckBox bottomLandscape = findViewById(R.id.bottomLandscape);
-        CheckBox none = findViewById(R.id.none);
-        findViewById(R.id.applyControllerMode).setOnClickListener(v -> {
-            int mode = ExoVideoPlaybackControlView.CONTROLLER_MODE_NONE;
-            if (all.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_ALL;
-            }
-            if (top.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_TOP;
-            }
-
-            if (topLandscape.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_TOP_LANDSCAPE;
-            }
-            if (bottom.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_BOTTOM;
-            }
-            if (bottomLandscape.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_BOTTOM_LANDSCAPE;
-            }
-            if (none.isChecked()) {
-                mode |= ExoVideoPlaybackControlView.CONTROLLER_MODE_NONE;
-            }
-
-            videoView.setControllerDisplayMode(mode);
-            Toast.makeText(SimpleVideoViewActivity.this, "change controller display mode", Toast.LENGTH_SHORT).show();
-        });
-
-
-    }
-
-    private void initCustomViews() {
-        findViewById(R.id.addToTop).setOnClickListener(v -> {
-            View view = getLayoutInflater().inflate(R.layout.cutom_view_top, null, false);
-            videoView.addCustomView(ExoVideoPlaybackControlView.CUSTOM_VIEW_TOP, view);
-        });
-
-        findViewById(R.id.addToTopLandscape).setOnClickListener(v -> {
-            View view = getLayoutInflater().inflate(R.layout.cutom_view_top_landscape, null, false);
-            videoView.addCustomView(ExoVideoPlaybackControlView.CUSTOM_VIEW_TOP_LANDSCAPE, view);
-        });
-
-
-        findViewById(R.id.addToBottomLandscape).setOnClickListener(v -> {
-            View view = getLayoutInflater().inflate(R.layout.cutom_view_bottom_landscape, null, false);
-            videoView.addCustomView(ExoVideoPlaybackControlView.CUSTOM_VIEW_BOTTOM_LANDSCAPE, view);
-        });
-    }
-
-    private void changeToPortrait() {
-
-        // WindowManager operation is not necessary
-        WindowManager.LayoutParams attr = getWindow().getAttributes();
-//        attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        Window window = getWindow();
-        window.setAttributes(attr);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-
-        wrapper.setVisibility(View.VISIBLE);
-    }
-
-
-    private void changeToLandscape() {
-
-        // WindowManager operation is not necessary
-
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-//        lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        Window window = getWindow();
-        window.setAttributes(lp);
-        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        wrapper.setVisibility(View.GONE);
-    }
-
 
     @Override
     protected void onStart() {
@@ -253,6 +283,10 @@ public class SimpleVideoViewActivity extends AppCompatActivity {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             return videoView.onKeyDown(keyCode, event);
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+            onKeyUP();
         }
         return super.onKeyDown(keyCode, event);
     }
