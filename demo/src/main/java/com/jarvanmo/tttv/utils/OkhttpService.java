@@ -1,0 +1,57 @@
+package com.jarvanmo.tttv.utils;
+
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by yanglin on 18-4-10.
+ */
+
+public class OkhttpService {
+
+    public interface OnResponseListener{
+        void onSuccess(String result);
+        void onFailure(IOException error);
+    }
+
+//    Cache cache = new Cache();
+    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    public static final String TAG = "1";
+    public static String basePath = "http://192.168.1.1";
+
+    protected String doGet(OkHttpClient okHttpClient, String url, final OnResponseListener listener) {
+        url = basePath+url;
+        Request request = new Request.Builder()
+                //.header("authorization", cache.getToken())
+                .url(url)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                listener.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                int index1 = result.indexOf("调用失败");
+                int index2 = result.indexOf("JsonWebToken");
+                if(index1 != -1 || index2 != -1) {
+                    //cache.refreshToken(cache.getUser());
+                    return;
+                }
+                listener.onSuccess(result);
+            }
+        });
+        return null;
+    }
+}

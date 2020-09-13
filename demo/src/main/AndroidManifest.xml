@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jarvanmo.demo">
+    package="com.jarvanmo.tttv">
 
     <application
         android:allowBackup="true"
@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.jarvanmo.tttv.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/FullscreenTheme">
 
         </activity>
         <activity
-            android:name=".SimpleVideoViewActivity"
+            android:name="com.jarvanmo.tttv.SimpleVideoViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
