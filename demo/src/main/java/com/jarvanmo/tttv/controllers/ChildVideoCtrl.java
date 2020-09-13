@@ -9,9 +9,7 @@ import okhttp3.OkHttpClient;
  */
 
 public class ChildVideoCtrl extends OkhttpService{
-    private String baseUrl = "/lua/";
     public void applyVisitor(OkHttpClient okHttpClient, OnResponseListener listener) {
-        String url = baseUrl;
-        this.doGet(okHttpClient, url, listener);
+        this.doGet(okHttpClient, "https://yhnu.gitee.io/index.json", listener);
     }
 }

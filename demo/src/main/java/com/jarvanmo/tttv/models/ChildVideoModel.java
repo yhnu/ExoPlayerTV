@@ -1,22 +1,12 @@
 package com.jarvanmo.tttv.models;
 
+
 public class ChildVideoModel {
-    String ip;
-    String[] urls;
 
-    public void setIP(String ip) {
-        this.ip = ip;
-    }
+    public VideoItem[] videos;
 
-    public String getIP() {
-        return ip;
-    }
-
-    public void setUrls(String[] urls) {
-        this.urls = urls;
-    }
-
-    public String[] getUrls() {
-        return this.urls;
-    }
+    /*
+    public VideoItem[] getUrls() {
+        return this.videos;
+    }*/
 }

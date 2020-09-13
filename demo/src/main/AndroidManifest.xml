@@ -11,12 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.jarvanmo.tttv.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/FullscreenTheme">
-
-        </activity>
-        <activity
-            android:name="com.jarvanmo.tttv.SimpleVideoViewActivity"
+            android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

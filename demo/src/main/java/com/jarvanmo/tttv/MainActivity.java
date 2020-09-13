@@ -23,12 +23,13 @@ import static com.jarvanmo.exoplayerview.orientation.OnOrientationChangedListene
 
 import com.jarvanmo.tttv.controllers.ChildVideoCtrl;
 import com.jarvanmo.tttv.models.ChildVideoModel;
+import com.jarvanmo.tttv.models.VideoItem;
 import com.jarvanmo.tttv.utils.OkhttpService;
 
-public class SimpleVideoViewActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ExoVideoView videoView;
-    private String[] urls;
+    private VideoItem[] urls;
     private int m_Index = 0;
     private  OkHttpClient okHttpClient = new OkHttpClient();
     private ChildVideoCtrl childVideoCtrl = new ChildVideoCtrl();
@@ -44,23 +45,24 @@ public class SimpleVideoViewActivity extends AppCompatActivity {
         childVideoCtrl.applyVisitor(this.okHttpClient, new OkhttpService.OnResponseListener() {
             @Override
             public void onSuccess(String result) {
+                Log.d("exo", result);
                 java.lang.reflect.Type type = new TypeToken<ChildVideoModel>() {}.getType();
                 final ChildVideoModel childVideos = new Gson().fromJson(result, type);
-                Log.d("exo", "AFD_FSDK_InitialFaceEngine = " + childVideos.getUrls().length);
-                (SimpleVideoViewActivity.this).runOnUiThread(new Runnable() {
+                Log.d("exo", "AFD_FSDK_InitialFaceEngine = " + childVideos.videos.length);
+                (MainActivity.this).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        urls = childVideos.getUrls();
+                        urls = childVideos.videos;
                         PlayVideoList();
                     }
                 });
             }
             @Override
             public void onFailure(IOException error) {
-                (SimpleVideoViewActivity.this).runOnUiThread(new Runnable() {
+                (MainActivity.this).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(SimpleVideoViewActivity.this, "添加失败，网络异常", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "添加失败，网络异常", Toast.LENGTH_SHORT).show();
                         Log.e("exo", "Get Video List Failed");
                     }
                 });
@@ -111,7 +113,9 @@ public class SimpleVideoViewActivity extends AppCompatActivity {
 
     private void PlayVideoList()
     {
-        String url = urls[m_Index];
+        String url = urls[m_Index].video_url;
+        //url = url.replace("http", "https");
+        //url = "https://yhnu.gitee.io/maths/Meet_the_Math_Facts_Addition_Subtraction_1_1_2.mp4.html";
         Log.e("exo", url);
 
         SimpleMediaSource mediaSource = new SimpleMediaSource(url);

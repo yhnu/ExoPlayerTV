@@ -1,6 +1,8 @@
 package com.jarvanmo.tttv.utils;
 
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -21,15 +23,15 @@ public class OkhttpService {
         void onFailure(IOException error);
     }
 
-//    Cache cache = new Cache();
     MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String TAG = "1";
-    public static String basePath = "http://192.168.1.1";
 
     protected String doGet(OkHttpClient okHttpClient, String url, final OnResponseListener listener) {
-        url = basePath+url;
+        Log.i(TAG, "doGet: " + url);
         Request request = new Request.Builder()
                 //.header("authorization", cache.getToken())
+                .removeHeader("User-Agent")
+                .addHeader("User-Agent","Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4)")
                 .url(url)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -45,6 +47,7 @@ public class OkhttpService {
                 String result = response.body().string();
                 int index1 = result.indexOf("调用失败");
                 int index2 = result.indexOf("JsonWebToken");
+                int index3 = result.indexOf("403");
                 if(index1 != -1 || index2 != -1) {
                     //cache.refreshToken(cache.getUser());
                     return;
