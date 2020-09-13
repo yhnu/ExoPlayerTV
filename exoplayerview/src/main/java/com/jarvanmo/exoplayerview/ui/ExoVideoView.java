@@ -66,7 +66,9 @@ import static android.content.Context.AUDIO_SERVICE;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class ExoVideoView extends FrameLayout implements ExoVideoPlaybackControlView.VideoViewAccessor {
-
+    public interface OnPlayerStateChangedListener{
+        void onChanged(boolean playWhenReady, int playbackState);
+    }
 
     private static final int SURFACE_TYPE_NONE = 0;
     private static final int SURFACE_TYPE_SURFACE_VIEW = 1;
@@ -80,7 +82,10 @@ public class ExoVideoView extends FrameLayout implements ExoVideoPlaybackControl
     private final ExoVideoPlaybackControlView controller;
     private final ComponentListener componentListener;
     private final FrameLayout overlayFrameLayout;
-
+    private OnPlayerStateChangedListener stateChangeListener;
+    public void SetOnPlayerStateChanged(OnPlayerStateChangedListener listener) {
+        stateChangeListener = listener;
+    }
 
     private SimpleExoPlayer player;
     private boolean useController;
@@ -978,7 +983,6 @@ public class ExoVideoView extends FrameLayout implements ExoVideoPlaybackControl
         }
     }
 
-
     public void setOrientationListener(ExoVideoPlaybackControlView.OrientationListener orientationListener) {
         if (controller != null) {
             controller.setOrientationListener(orientationListener);
@@ -1158,6 +1162,10 @@ public class ExoVideoView extends FrameLayout implements ExoVideoPlaybackControl
                 hideController();
             } else {
                 maybeShowController(false);
+            }
+            if(stateChangeListener != null)
+            {
+                stateChangeListener.onChanged(playWhenReady, playbackState);
             }
         }
 

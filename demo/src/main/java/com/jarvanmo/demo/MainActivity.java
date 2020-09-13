@@ -27,7 +27,6 @@ import static com.jarvanmo.exoplayerview.orientation.OnOrientationChangedListene
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ExoVideoView videoView;
     private Button modeFit;
     private Button modeNone;

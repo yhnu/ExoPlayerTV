@@ -40,7 +40,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation 'junit:junit:4.12'
     implementation project(':exoplayerview')
-//    compile 'com.jarvanmo:exoplayerview:0.0.1'
-//    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+//  compile 'com.jarvanmo:exoplayerview:0.0.1'
+//  implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
     compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
